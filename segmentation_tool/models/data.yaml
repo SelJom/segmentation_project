@@ -1,0 +1,7 @@
+train: C:/Users/marcv/Desktop/project/segmentation_tool/dataset/train/images
+val: C:/Users/marcv/Desktop/project/segmentation_tool/dataset/val/images
+
+#test: dataset/test/images    # Optional, for testing
+
+nc: 2  # Number of classes
+names: ['void', 'chip']  # Class names

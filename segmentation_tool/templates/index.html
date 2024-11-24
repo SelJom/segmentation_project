@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Segmentation Tools</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+    <div class="container mt-4">
+        <!-- Header -->
+        <h1 class="text-center mb-4">Segmentation Tools</h1>
+
+        <!-- Interactive Segmentation Tool -->
+        <div class="tool-section mb-4">
+            <h2 class="text-center">Interactive Segmentation Tool</h2>
+            <div class="btn-group mb-3 d-flex justify-content-center">
+                <button id="voidsButton" class="btn btn-outline-primary active">Voids</button>
+                <button id="chipsButton" class="btn btn-outline-primary">Chips</button>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <h5 class="text-center">Input Image</h5>
+                    <div class="canvas-container">
+                        <canvas id="inputCanvas"></canvas>
+                    </div>
+                    <button id="clearPoints" class="btn btn-danger mt-3">Clear Points</button>
+                </div>
+                <div class="col-md-6">
+                    <h5 class="text-center">Segmented Image</h5>
+                    <div class="canvas-container">
+                        <canvas id="segmentedCanvas"></canvas>
+                    </div>
+                    <div class="d-flex justify-content-end mt-3">
+                        <button id="historyButton" class="btn btn-secondary me-2">History</button>
+                        <button id="saveBothButton" class="btn btn-primary me-2">Save Both</button>
+                        <button id="retrainModelButton" class="btn btn-primary me-2">Retrain Model</button>
+                        <button id="cancelTrainingButton" class="btn btn-danger me-2" style="display: none;">Cancel Training</button>
+                        <button id="clearHistoryButton" class="btn btn-danger">Clear History</button>
+                    </div>
+                </div>
+            </div>
+            <input type="file" id="imageUpload" class="form-control mt-3">
+        </div>
+
+        <!-- Training Progress Indicator -->
+        <div id="trainingProgress" class="alert alert-info mt-3" style="display: none;">
+            <strong>Training in Progress:</strong> <span id="progressMessage">Initializing...</span>
+            <br>
+            <span id="estimatedTimeLeft">Estimated Time Left: Calculating...</span>
+        </div>
+
+        <!-- Automatic Segmentation Tool -->
+        <div class="tool-section">
+            <h2 class="text-center">Automatic Segmentation Tool</h2>
+            <div class="row">
+                <div class="col-md-6">
+                    <h5 class="text-center">Input Image</h5>
+                    <input type="file" id="automaticImageUpload" class="form-control">
+                </div>
+                <div class="col-md-6">
+                    <h5 class="text-center">Processed Image</h5>
+                    <div class="canvas-container">
+                        <img id="automaticProcessedImage" src="#" alt="Processed Image" style="display: none;">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Results Table -->
+        <div class="tool-section">
+            <h2 class="text-center">Segmentation Results</h2>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Image Name</th>
+                        <th>Chip #</th>
+                        <th>Chip Area</th>
+                        <th>Void %</th>
+                        <th>Max Void %</th>
+                    </tr>
+                </thead>
+                <tbody id="resultsTableBody">
+                    <!-- Dynamic rows will be added here -->
+                </tbody>
+            </table>
+            <div class="d-flex justify-content-end mt-3">
+                <button id="clearTableButton" class="btn btn-primary me-2">Clear Table</button>
+                <button id="exportTableButton" class="btn btn-primary">Export Table</button>
+            </div>
+        </div>
+    </div>        
+
+    <!-- History Modal -->
+    <div class="modal fade" id="historyModal" tabindex="-1" aria-labelledby="historyModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="historyModalLabel">Saved History</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <ul id="historyList" class="list-group">
+                        <!-- Example List Item -->
+                        <li class="list-group-item">
+                            <span class="filename">11_JPG.rf.3aa3109a1838549cf273cdbe8b2cafeb.jpg</span>
+                            <button class="btn btn-danger">Delete</button>
+                        </li>
+                        <li class="list-group-item">
+                            <span class="filename">15r_jpg.rf.2da1990173346311d3a3555e23a9164a.jpg</span>
+                            <button class="btn btn-danger">Delete</button>
+                        </li>
+                    </ul>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+        // Ensure the modal backdrop is properly removed when the modal is closed
+        document.getElementById('historyModal').addEventListener('hidden.bs.modal', function () {
+            document.body.classList.remove('modal-open');
+            const backdrop = document.querySelector('.modal-backdrop');
+            if (backdrop) {
+                backdrop.remove();
+            }
+        });
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+</body>
+</html>

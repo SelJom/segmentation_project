@@ -1,0 +1,292 @@
+/* Import Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+
+/* General Body Styling */
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: #f4f6f8;
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+}
+
+/* Container Styling */
+.container {
+    max-width: 1400px; /* Widened to better fit the boxes */
+    background: white;
+    padding: 30px;
+    border-radius: 16px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    margin: 20px auto;
+}
+
+/* Section Headers */
+h1, h2 {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #333;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* Tool Sections */
+.tool-section {
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 16px;
+    padding: 20px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 30px;
+    width: 100%;
+    max-width: 1200px; /* Increased to align with SAM boxes */
+    margin: 20px auto;
+}
+
+/* Buttons Styling */
+.btn-group {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+    gap: 10px;
+}
+
+.btn-group button {
+    font-size: 16px;
+    padding: 10px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    width: 50%; /* Equal button width */
+}
+
+.btn-group button.active {
+    background-color: #007bff;
+    color: white;
+    border: 1px solid #0056b3;
+}
+
+.btn-group button:hover {
+    background-color: #0056b3;
+    color: white;
+}
+
+/* Tool Layout */
+.tool-container {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    align-items: center;
+}
+
+/* Canvas Containers */
+.canvas-container {
+    width: 100%;
+    max-width: 600px; /* Adjusted for better alignment */
+    aspect-ratio: 1 / 1;
+    border: 2px solid #ddd;
+    border-radius: 16px;
+    background-color: #fff;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    margin: 0 auto;
+}
+
+/* File Upload Fields */
+input[type="file"] {
+    margin-top: 20px;
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    box-shadow: inset 0px 1px 3px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 600px;
+}
+
+input[type="file"]:focus {
+    border: 1px solid #007bff;
+    outline: none;
+}
+
+/* Processed Image Styling */
+#automaticProcessedImage {
+    border: 2px solid #ddd;
+    border-radius: 16px;
+    background-color: #fff;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    height: auto;
+    margin-top: 20px;
+}
+
+/* Clear Points Button */
+#clearPoints {
+    margin-top: 20px;
+    font-size: 14px;
+    padding: 10px 15px;
+    border-radius: 5px;
+    color: white;
+    background-color: #dc3545;
+    border: none;
+    cursor: pointer;
+}
+
+#clearPoints:hover {
+    background-color: #b52b37;
+}
+
+/* Table Styling */
+.table {
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 100%;
+}
+
+.table th {
+    background-color: #007bff; /* Blue column headers */
+    color: white;
+    font-weight: bold;
+    text-align: center;
+    padding: 10px;
+}
+
+.table td {
+    padding: 10px;
+    vertical-align: middle;
+    background-color: #f9f9f9;
+    text-align: center;
+}
+
+.table-responsive {
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+/* Buttons Styling */
+#clearTableButton, #exportTableButton {
+    font-size: 16px;
+    padding: 10px 20px;
+    border-radius: 8px;
+    color: white;
+    background-color: #007bff;
+    border: none;
+    transition: all 0.3s ease-in-out;
+}
+
+#clearTableButton:hover, #exportTableButton:hover {
+    background-color: #0056b3;
+    cursor: pointer;
+}
+
+/* Responsive Design */
+@media screen and (max-width: 768px) {
+    .tool-section {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .canvas-container {
+        margin-bottom: 20px;
+    }
+
+    .btn-group button {
+        width: 100%;
+    }
+
+    .table {
+        font-size: 14px;
+    }
+}
+
+/* Additional Adjustments */
+.tool-section img, canvas {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+}
+
+#historyButton {
+    font-size: 16px;
+    padding: 10px 20px;
+    border-radius: 8px;
+    color: white;
+    background-color: #6c757d; /* Bootstrap secondary color */
+    border: none;
+}
+
+#historyButton:hover {
+    background-color: #5a6268;
+    cursor: pointer;
+}
+
+/* Modal Body Styling */
+.modal-body {
+    padding: 15px;
+    width: 100%;
+    max-width: 600px; /* Adjust width to accommodate delete buttons */
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+/* History Modal List Styling */
+#historyList {
+    padding: 0;
+    margin: 0;
+    list-style: none; /* Remove default bullets */
+    width: 100%; /* Expand list width */
+}
+
+/* List Group Item Styling */
+#historyList .list-group-item {
+    display: flex; /* Flexbox for alignment */
+    justify-content: space-between; /* Space between filename and delete button */
+    align-items: center; /* Vertically align items */
+    padding: 10px 15px; /* Add consistent padding */
+    border: 1px solid #ddd; /* Optional: border for clarity */
+    border-radius: 8px; /* Rounded corners */
+    background-color: #fff; /* White background for contrast */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    margin-bottom: 5px; /* Space between list items */
+    width: 100%; /* Ensure full width inside modal */
+}
+
+/* Filename Styling */
+#historyList .filename {
+    flex-grow: 1; /* Allow filename to take up available space */
+    text-overflow: ellipsis; /* Truncate long names */
+    white-space: nowrap; /* Prevent wrapping */
+    overflow: hidden; /* Hide overflowing text */
+    padding-right: 15px; /* Space between filename and delete button */
+}
+
+/* Delete Button Styling */
+#historyList .btn-danger {
+    flex-shrink: 0; /* Prevent button from shrinking */
+    padding: 5px 15px;
+    font-size: 14px;
+    border-radius: 8px; /* Rounded corners */
+    background-color: #dc3545; /* Standard Bootstrap danger color */
+    border: none;
+    transition: all 0.3s ease-in-out;
+}
+
+#historyList .btn-danger:hover {
+    background-color: #b52b37; /* Slightly darker red on hover */
+    color: white;
+    cursor: pointer;
+}
+
+/* Modal Adjustments */
+.modal-dialog {
+    max-width: 700px; /* Wider modal dialog to fit the expanded list and delete buttons */
+}
+
+.modal-content {
+    padding: 10px;
+}
