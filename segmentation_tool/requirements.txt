@@ -1,3 +1,9 @@
 Flask
 Pillow
 numpy<2
+Flask-SocketIO
+Pillow
+torch==2.3.1+cu118
+torchaudio==2.3.1+cu118
+torchvision==0.18.1+cu118
+ultralytics
