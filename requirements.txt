@@ -9,3 +9,4 @@ ultralytics
 hydra-core
 opencv-python
 iopath
+omegaconf
