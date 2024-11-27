@@ -85,9 +85,12 @@ load_training_status()
 
 os.environ["TORCH_CUDNN_SDPA_ENABLED"] = "0"
 
-# Initialize SAM Predictor
-MODEL_CFG = r"C:\codes\sam2\segment-anything-2\sam2\configs\sam2.1\sam2.1_hiera_l.yaml"
-CHECKPOINT = r"C:\codes\sam2\segment-anything-2\checkpoints\sam2.1_hiera_large.pt"
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+
+#Initializing Sam Predictor
+MODEL_CFG = os.path.join(BASE_DIR, "sam2", "sam2_image_predictor.py")
+CHECKPOINT = os.path.join(BASE_DIR, "checkpoints", "sam2.1_hiera_large.pt")
+
 DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 predictor = Predictor(MODEL_CFG, CHECKPOINT, DEVICE)
 
