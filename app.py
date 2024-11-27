@@ -18,6 +18,9 @@ import subprocess
 import time
 import logging
 import multiprocessing
+import os
+import hydra
+from omegaconf import DictConfig
 
 
 # Initialize Flask app and SocketIO
@@ -89,8 +92,36 @@ os.environ["TORCH_CUDNN_SDPA_ENABLED"] = "0"
 MODEL_CFG = "sam2/configs/sam2.1/sam2.1_hiera_l.yaml"
 CHECKPOINT = "checkpoints/sam2.1_hiera_large.pt"
 
+
+# Modify your configuration loading
+def load_sam2_config(config_path):
+    # Ensure the full path is used
+    full_config_path = os.path.abspath(config_path)
+    
+    # Check if file exists
+    if not os.path.exists(full_config_path):
+        raise FileNotFoundError(f"Configuration file not found at {full_config_path}")
+    
+    # Use hydra to load the configuration
+    with hydra.initialize(version_base=None, config_path=os.path.dirname(config_path)):
+        cfg = hydra.compose(config_name=os.path.basename(config_path))
+    
+    return cfg
+
+# Configuration paths
+PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
+MODEL_CFG_PATH = os.path.join(PROJECT_ROOT, "sam2", "configs", "sam2.1", "sam2.1_hiera_l.yaml")
+CHECKPOINT = os.path.join(PROJECT_ROOT, "checkpoints", "sam2.1_hiera_large.pt")
 DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-predictor = Predictor(MODEL_CFG, CHECKPOINT, DEVICE)
+
+# Load configuration
+try:
+    MODEL_CFG = load_sam2_config(MODEL_CFG_PATH)
+    predictor = Predictor(MODEL_CFG, CHECKPOINT, DEVICE)
+except Exception as e:
+    print(f"Error loading configuration: {e}")
+    # Handle the error appropriately for your application
+
 
 # Initialize YOLO-seg
 YOLO_CFG = os.path.join(DATASET_FOLDERS['models'], "best.pt")
